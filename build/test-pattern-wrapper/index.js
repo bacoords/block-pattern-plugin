@@ -232,7 +232,7 @@ module.exports = window["wp"]["i18n"];
   \*********************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wpdev/test-pattern-wrapper","version":"0.1.0","title":"Test Pattern Wrapper","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"align":["wide","full"]},"attributes":{"align":{"type":"string","default":"full"},"pattern":{"type":"string","default":"pattern1"}},"textdomain":"test-pattern-wrapper","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wpdev/test-pattern-wrapper","version":"0.1.0","title":"Pattern Content","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"align":["wide","full"]},"attributes":{"align":{"type":"string","default":"full"},"pattern":{"type":"string","default":"pattern1"}},"textdomain":"test-pattern-wrapper","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

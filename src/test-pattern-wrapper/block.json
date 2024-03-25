@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "wpdev/test-pattern-wrapper",
 	"version": "0.1.0",
-	"title": "Test Pattern Wrapper",
+	"title": "Pattern Content",
 	"category": "widgets",
 	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",

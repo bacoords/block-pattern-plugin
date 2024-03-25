@@ -32,6 +32,13 @@ import "./editor.scss";
  * @return {WPElement} Element to render.
  */
 export default function Edit({ attributes, setAttributes }) {
+	// let pattern = {};
+
+	// if ( attributes.pattern ) {
+	// 	// Get the pattern object based on the pattern name.
+	// 	fs.read
+	// }
+
 	const blockProps = useBlockProps();
 	const innerBlocksProps = {
 		template: [

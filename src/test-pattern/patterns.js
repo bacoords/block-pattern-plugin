@@ -269,4 +269,14 @@ export default {
 			],
 		],
 	},
+	pattern4: {
+		template: [
+			[
+				"core/pattern",
+				{
+					slug: "tangent/call-to-action",
+				},
+			],
+		],
+	},
 };

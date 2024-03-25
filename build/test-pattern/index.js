@@ -57,6 +57,13 @@ function Edit({
   attributes,
   setAttributes
 }) {
+  // let pattern = {};
+
+  // if ( attributes.pattern ) {
+  // 	// Get the pattern object based on the pattern name.
+  // 	fs.read
+  // }
+
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
   const innerBlocksProps = {
     template: [["wpdev/test-pattern-wrapper", {
@@ -233,6 +240,11 @@ __webpack_require__.r(__webpack_exports__);
         orientation: "vertical"
       }
     }, [["core/heading", {}, []], ["core/paragraph", {}, []], ["core/separator", {}, []], ["core/list", {}, [["core/list-item", {}, []]]]]]]]]]]]]
+  },
+  pattern4: {
+    template: [["core/pattern", {
+      slug: "tangent/call-to-action"
+    }]]
   }
 });
 
@@ -308,7 +320,7 @@ module.exports = window["wp"]["i18n"];
   \*************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wpdev/test-pattern","version":"0.1.0","title":"Test Pattern","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"align":["wide","full"],"color":{"background":true,"text":true},"spacing":{"padding":true}},"attributes":{"align":{"type":"string","default":"full"},"pattern":{"type":"string","default":"pattern1"}},"variations":[{"name":"pattern1","title":"Pattern 1","isDefault":true,"attributes":{"align":"full","pattern":"pattern1"}},{"name":"pattern2","title":"Pattern 2","attributes":{"align":"wide","pattern":"pattern2"}},{"name":"pattern3","title":"Pattern 3","attributes":{"align":"full","pattern":"pattern3"}}],"textdomain":"test-pattern","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wpdev/test-pattern","version":"0.1.0","title":"Test Pattern","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"align":["wide","full"],"color":{"background":true,"text":true},"spacing":{"padding":true}},"attributes":{"align":{"type":"string","default":"full"},"pattern":{"type":"string","default":"pattern1"}},"variations":[{"name":"pattern1","title":"Pattern 1","isDefault":true,"attributes":{"align":"full","pattern":"pattern1","metadata":{"name":"Pattern 1"}}},{"name":"pattern2","title":"Pattern 2","attributes":{"align":"wide","pattern":"pattern2","metadata":{"name":"Pattern 2"}}},{"name":"pattern3","title":"Pattern 3","attributes":{"align":"full","pattern":"pattern3","metadata":{"name":"Pattern 3"}}},{"name":"pattern4","title":"Pattern 4","attributes":{"align":"full","pattern":"pattern4","metadata":{"name":"Pattern 4"}}}],"textdomain":"test-pattern","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php"}');
 
 /***/ })
 

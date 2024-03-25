@@ -39,7 +39,10 @@
       "isDefault": true,
       "attributes": {
         "align": "full",
-        "pattern": "pattern1"
+        "pattern": "pattern1",
+        "metadata": {
+          "name": "Pattern 1"
+        }
       }
     },
     {
@@ -47,7 +50,10 @@
       "title": "Pattern 2",
       "attributes": {
         "align": "wide",
-        "pattern": "pattern2"
+        "pattern": "pattern2",
+        "metadata": {
+          "name": "Pattern 2"
+        }
       }
     },
     {
@@ -55,7 +61,21 @@
       "title": "Pattern 3",
       "attributes": {
         "align": "full",
-        "pattern": "pattern3"
+        "pattern": "pattern3",
+        "metadata": {
+          "name": "Pattern 3"
+        }
+      }
+    },
+    {
+      "name": "pattern4",
+      "title": "Pattern 4",
+      "attributes": {
+        "align": "full",
+        "pattern": "pattern4",
+        "metadata": {
+          "name": "Pattern 4"
+        }
       }
     }
   ],
