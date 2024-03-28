@@ -26,3 +26,23 @@ function wpdev_block_pattern_plugin_block_init() {
 	register_block_type( __DIR__ . '/build/test-pattern' );
 }
 add_action( 'init', __NAMESPACE__ . '\wpdev_block_pattern_plugin_block_init' );
+
+
+
+/**
+ * Enqueue block editor assets.
+ *
+ * @return void
+ */
+function enqueue_custom_block_editor_modifications() {
+
+	$asset_file = include plugin_dir_path( __FILE__ ) . 'build/editor/index.asset.php';
+	wp_enqueue_script(
+		'block-pattern-plugin-editor',
+		plugins_url( 'build/editor/index.js', __FILE__ ),
+		$asset_file['dependencies'],
+		$asset_file['version'],
+		true
+	);
+}
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_custom_block_editor_modifications' );
