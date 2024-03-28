@@ -156,8 +156,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockVariation)("core/group", {
-  name: "content-locked",
-  title: "Content Locked",
+  name: "pattern-container",
+  title: "Pattern Container",
   description: "Group block with locked content",
   attributes: {
     align: "full",
@@ -180,7 +180,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   innerBlocks: [["core/group", {
-    templateLock: "contentOnly",
+    templateLock: "",
     layout: {
       type: "constrained"
     }

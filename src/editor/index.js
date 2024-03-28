@@ -5,8 +5,8 @@ import { addFilter } from "@wordpress/hooks";
 import { createHigherOrderComponent } from "@wordpress/compose";
 
 registerBlockVariation("core/group", {
-	name: "content-locked",
-	title: "Content Locked",
+	name: "pattern-container",
+	title: "Pattern Container",
 	description: "Group block with locked content",
 	attributes: {
 		align: "full",
@@ -28,7 +28,7 @@ registerBlockVariation("core/group", {
 		[
 			"core/group",
 			{
-				templateLock: "contentOnly",
+				templateLock: "",
 				layout: { type: "constrained" },
 			},
 			[["core/paragraph", { placeholder: "Content locked" }]],

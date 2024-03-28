@@ -4,7 +4,7 @@ Experimental plugin to store some pattern management features. This should never
 
 ## Features
 
-### Block Pattern Group Block Scaffold (Group Block Variation)
+### "Pattern Container" Group Block Variation
 
 Scaffold for a group block that has a full-width pattern, some padding in it, and then an inner group with content locking.
 
