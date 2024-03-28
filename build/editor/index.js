@@ -200,19 +200,19 @@ __webpack_require__.r(__webpack_exports__);
  * @returns {JSX}
  */
 function ContentToggleEdit(props) {
+  const {
+    attributes,
+    setAttributes
+  } = props;
   const toggleContentLock = () => {
-    const {
-      clientId,
-      setAttributes
-    } = props;
-    const block = wp.data.select("core/block-editor").getBlock(clientId);
-    const isLocked = block.attributes.templateLock === "contentOnly";
+    const isLocked = attributes.templateLock === "contentOnly";
     setAttributes({
       templateLock: isLocked ? "" : "contentOnly"
     });
   };
+  const buttonText = attributes.templateLock === "contentOnly" ? "Advanced" : "Lock Content";
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarButton, {
-    text: "Toggle ContentLock",
+    text: buttonText,
     onClick: toggleContentLock
   }));
 }

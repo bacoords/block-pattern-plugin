@@ -47,16 +47,19 @@ registerBlockVariation("core/group", {
  * @returns {JSX}
  */
 function ContentToggleEdit(props) {
+	const { attributes, setAttributes } = props;
+
 	const toggleContentLock = () => {
-		const { clientId, setAttributes } = props;
-		const block = wp.data.select("core/block-editor").getBlock(clientId);
-		const isLocked = block.attributes.templateLock === "contentOnly";
+		const isLocked = attributes.templateLock === "contentOnly";
 		setAttributes({ templateLock: isLocked ? "" : "contentOnly" });
 	};
 
+	const buttonText =
+		attributes.templateLock === "contentOnly" ? "Advanced" : "Lock Content";
+
 	return (
 		<BlockControls>
-			<ToolbarButton text={"Toggle ContentLock"} onClick={toggleContentLock} />
+			<ToolbarButton text={buttonText} onClick={toggleContentLock} />
 		</BlockControls>
 	);
 }
