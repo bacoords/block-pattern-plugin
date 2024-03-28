@@ -3,7 +3,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-import { registerBlockType } from "@wordpress/blocks";
+import { registerBlockType, registerBlockVariation } from "@wordpress/blocks";
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -30,11 +30,36 @@ registerBlockType(metadata.name, {
 	 * @see ./edit.js
 	 */
 	edit: Edit,
-	save: (props) => {
-		return (
-			<div {...useBlockProps.save({ className: props.attributes.pattern })}>
-				<InnerBlocks.Content />
-			</div>
-		);
+});
+
+registerBlockVariation("core/group", {
+	name: "content-locked",
+	title: "Content Locked",
+	description: "Group block with locked content",
+	attributes: {
+		align: "full",
+		tagName: "section",
+		layout: { type: "default" },
+		metadata: { name: "Pattern" },
+		style: {
+			spacing: {
+				padding: {
+					top: "var:preset|spacing|xl",
+					bottom: "var:preset|spacing|xl",
+					left: "var:preset|spacing|sm",
+					right: "var:preset|spacing|sm",
+				},
+			},
+		},
 	},
+	innerBlocks: [
+		[
+			"core/group",
+			{
+				templateLock: "contentOnly",
+				layout: { type: "constrained" },
+			},
+			[["core/paragraph", { placeholder: "Content locked" }]],
+		],
+	],
 });

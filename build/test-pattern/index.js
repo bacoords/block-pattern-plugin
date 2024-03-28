@@ -18,8 +18,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _patterns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./patterns */ "./src/test-pattern/patterns.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.scss */ "./src/test-pattern/editor.scss");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/test-pattern/editor.scss");
 
 /**
  * Retrieves the translation of text.
@@ -34,6 +37,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
+
 
 
 
@@ -57,24 +61,11 @@ function Edit({
   attributes,
   setAttributes
 }) {
-  // let pattern = {};
-
-  // if ( attributes.pattern ) {
-  // 	// Get the pattern object based on the pattern name.
-  // 	fs.read
-  // }
-
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
-  const innerBlocksProps = {
-    template: [["wpdev/test-pattern-wrapper", {
-      pattern: _patterns__WEBPACK_IMPORTED_MODULE_3__["default"][attributes.pattern]
-    }]],
-    templateLock: "all"
-  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks, {
-    ...innerBlocksProps
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Placeholder, {
+    label: "All Patterns"
   })));
 }
 
@@ -87,16 +78,13 @@ function Edit({
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss */ "./src/test-pattern/style.scss");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./edit */ "./src/test-pattern/edit.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./block.json */ "./src/test-pattern/block.json");
-
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./src/test-pattern/style.scss");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/test-pattern/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/test-pattern/block.json");
 /**
  * Registers a new block provided a unique name and an object defining its behavior.
  *
@@ -124,128 +112,44 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
   /**
    * @see ./edit.js
    */
-  edit: _edit__WEBPACK_IMPORTED_MODULE_4__["default"],
-  save: props => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save({
-        className: props.attributes.pattern
-      })
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks.Content, null));
-  }
+  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
-
-/***/ }),
-
-/***/ "./src/test-pattern/patterns.js":
-/*!**************************************!*\
-  !*** ./src/test-pattern/patterns.js ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  pattern1: {
-    template: [["core/group", {
-      layout: {
-        type: "constrained"
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockVariation)("core/group", {
+  name: "content-locked",
+  title: "Content Locked",
+  description: "Group block with locked content",
+  attributes: {
+    align: "full",
+    tagName: "section",
+    layout: {
+      type: "default"
+    },
+    metadata: {
+      name: "Pattern"
+    },
+    style: {
+      spacing: {
+        padding: {
+          top: "var:preset|spacing|xl",
+          bottom: "var:preset|spacing|xl",
+          left: "var:preset|spacing|sm",
+          right: "var:preset|spacing|sm"
+        }
       }
-    }, [["core/heading", {
-      textAlign: "center"
-    }, []], ["core/paragraph", {
-      align: "center"
-    }, []], ["core/columns", {
-      align: "wide"
-    }, [["core/column", {}, [["core/image", {
-      aspectRatio: "3/4",
-      scale: "cover"
-    }, []], ["core/heading", {
-      textAlign: "center"
-    }, []], ["core/paragraph", {
-      align: "center"
-    }, []], ["core/buttons", {
-      layout: {
-        type: "flex",
-        justifyContent: "center"
-      }
-    }, [["core/button", {}, []]]]]], ["core/column", {}, [["core/image", {
-      aspectRatio: "3/4",
-      scale: "cover"
-    }, []], ["core/heading", {
-      textAlign: "center"
-    }, []], ["core/paragraph", {
-      align: "center"
-    }, []], ["core/buttons", {
-      layout: {
-        type: "flex",
-        justifyContent: "center"
-      }
-    }, [["core/button", {}, []]]]]], ["core/column", {}, [["core/image", {
-      aspectRatio: "3/4",
-      scale: "cover"
-    }, []], ["core/heading", {
-      textAlign: "center"
-    }, []], ["core/paragraph", {
-      align: "center"
-    }, []], ["core/buttons", {
-      layout: {
-        type: "flex",
-        justifyContent: "center"
-      }
-    }, [["core/button", {}, []]]]]]]]]]]
+    }
   },
-  pattern2: {
-    template: [["core/group", {
-      layout: {
-        type: "constrained"
-      }
-    }, [["core/columns", {
-      verticalAlignment: null,
-      align: "wide"
-    }, [["core/column", {}, [["core/image", {
-      aspectRatio: "4/3",
-      scale: "cover",
-      className: "is-style-rounded"
-    }, []]]], ["core/column", {
-      verticalAlignment: "center"
-    }, [["core/group", {
-      layout: {
-        type: "flex",
-        orientation: "vertical"
-      }
-    }, [["core/heading", {}, []], ["core/paragraph", {}, []], ["core/buttons", {}, [["core/button", {}, []]]]]]]]]]]]]
-  },
-  pattern3: {
-    template: [["core/group", {
-      layout: {
-        type: "constrained"
-      }
-    }, [["core/columns", {
-      align: "wide"
-    }, [["core/column", {}, [["core/image", {
-      aspectRatio: "4/3",
-      scale: "cover",
-      className: "is-style-rounded"
-    }, []]]], ["core/column", {
-      verticalAlignment: "center"
-    }, [["core/group", {
-      layout: {
-        type: "flex",
-        orientation: "vertical"
-      }
-    }, [["core/heading", {}, []], ["core/paragraph", {}, []], ["core/separator", {}, []], ["core/list", {}, [["core/list-item", {}, []]]]]]]]]]]]]
-  },
-  pattern4: {
-    template: [["core/pattern", {
-      slug: "tangent/call-to-action"
-    }]]
-  }
+  innerBlocks: [["core/group", {
+    templateLock: "contentOnly",
+    layout: {
+      type: "constrained"
+    }
+  }, [["core/paragraph", {
+    placeholder: "Content locked"
+  }]]]]
 });
 
 /***/ }),
@@ -304,6 +208,16 @@ module.exports = window["wp"]["blocks"];
 
 /***/ }),
 
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["components"];
+
+/***/ }),
+
 /***/ "@wordpress/i18n":
 /*!******************************!*\
   !*** external ["wp","i18n"] ***!
@@ -314,13 +228,23 @@ module.exports = window["wp"]["i18n"];
 
 /***/ }),
 
+/***/ "@wordpress/server-side-render":
+/*!******************************************!*\
+  !*** external ["wp","serverSideRender"] ***!
+  \******************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["serverSideRender"];
+
+/***/ }),
+
 /***/ "./src/test-pattern/block.json":
 /*!*************************************!*\
   !*** ./src/test-pattern/block.json ***!
   \*************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wpdev/test-pattern","version":"0.1.0","title":"Test Pattern","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"align":["wide","full"],"color":{"background":true,"text":true},"spacing":{"padding":true}},"attributes":{"align":{"type":"string","default":"full"},"pattern":{"type":"string","default":"pattern1"}},"variations":[{"name":"pattern1","title":"Pattern 1","isDefault":true,"attributes":{"align":"full","pattern":"pattern1","metadata":{"name":"Pattern 1"}}},{"name":"pattern2","title":"Pattern 2","attributes":{"align":"wide","pattern":"pattern2","metadata":{"name":"Pattern 2"}}},{"name":"pattern3","title":"Pattern 3","attributes":{"align":"full","pattern":"pattern3","metadata":{"name":"Pattern 3"}}},{"name":"pattern4","title":"Pattern 4","attributes":{"align":"full","pattern":"pattern4","metadata":{"name":"Pattern 4"}}}],"textdomain":"test-pattern","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wpdev/test-pattern","version":"0.1.0","title":"Show ALL Patterns","category":"design","icon":"welcome-view-site","description":"Quick block to show all of your patterns on the frontend of your site.","example":{},"supports":{"html":false,"align":["full"],"spacing":{"padding":true}},"attributes":{"align":{"type":"string","default":"full"}},"textdomain":"test-pattern","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php"}');
 
 /***/ })
 

@@ -1,6 +1,0 @@
-{
-  "__file": "wp_block",
-  "title": "Test Pattern",
-  "content": "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Heading</h2>\n<!-- /wp:heading -->\n\n<!-- wp:paragraph -->\n<p>Lorem ipsum dolor sit amet imperdiet feugiat vivamus arcu magna nunc nisl dui. Pulvinar turpis bibendum purus eros urna labore netus lectus lobortis maecenas aenean vel. Adipiscing faucibus hac cursus faucibus dictum sagittis aenean purus eros rhoncus aliquet cursus mi ullamcorper. Euismod a blandit ut pretium sodales tempor blandit ullamcorper tortor eleifend eget auctor quis. Consectetur nibh habitasse tortor curabitur ornare suspendisse pulvinar eget nunc condimentum netus mauris.</p>\n<!-- /wp:paragraph -->",
-  "syncStatus": ""
-}

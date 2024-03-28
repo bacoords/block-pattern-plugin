@@ -3,18 +3,14 @@
 	"apiVersion": 3,
 	"name": "wpdev/test-pattern",
 	"version": "0.1.0",
-	"title": "Test Pattern",
-	"category": "widgets",
-	"icon": "smiley",
-	"description": "Example block scaffolded with Create Block tool.",
+	"title": "Show ALL Patterns",
+	"category": "design",
+	"icon": "welcome-view-site",
+	"description": "Quick block to show all of your patterns on the frontend of your site.",
 	"example": {},
 	"supports": {
 		"html": false,
-		"align": ["wide", "full"],
-		"color": {
-			"background": true,
-			"text": true
-		},
+		"align": ["full"],
 		"spacing": {
 			"padding": true
 		}
@@ -23,51 +19,8 @@
 		"align": {
 			"type": "string",
 			"default": "full"
-		},
-		"pattern": {
-			"type": "string",
-			"default": "pattern1"
 		}
 	},
-	"variations": [
-		{
-			"name": "pattern1",
-			"title": "Pattern 1",
-			"isDefault": true,
-			"attributes": {
-				"align": "full",
-				"pattern": "pattern1",
-				"metadata":{"name":"Pattern 1"}
-			}
-		},
-		{
-			"name": "pattern2",
-			"title": "Pattern 2",
-			"attributes": {
-				"align": "wide",
-				"pattern": "pattern2",
-				"metadata":{"name":"Pattern 2"}
-			}
-		},
-		{
-			"name": "pattern3",
-			"title": "Pattern 3",
-			"attributes": {
-				"align": "full",
-				"pattern": "pattern3",
-				"metadata":{"name":"Pattern 3"}
-			}
-		},
-		{
-			"name": "pattern4",
-			"title": "Pattern 4",
-			"attributes": {
-				"align": "full",
-				"pattern": "pattern4",
-				"metadata":{"name":"Pattern 4"}
-			}
-		}
-	],
 	"textdomain": "test-pattern",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

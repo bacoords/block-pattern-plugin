@@ -11,9 +11,11 @@ import { __ } from "@wordpress/i18n";
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
+import { useBlockProps } from "@wordpress/block-editor";
 
-import patterns from "./patterns";
+import { Placeholder } from "@wordpress/components";
+
+import ServerSideRender from "@wordpress/server-side-render";
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -32,29 +34,12 @@ import "./editor.scss";
  * @return {WPElement} Element to render.
  */
 export default function Edit({ attributes, setAttributes }) {
-	// let pattern = {};
-
-	// if ( attributes.pattern ) {
-	// 	// Get the pattern object based on the pattern name.
-	// 	fs.read
-	// }
-
 	const blockProps = useBlockProps();
-	const innerBlocksProps = {
-		template: [
-			[
-				"wpdev/test-pattern-wrapper",
-				{
-					pattern: patterns[attributes.pattern],
-				},
-			],
-		],
-		templateLock: "all",
-	};
 	return (
 		<>
 			<div {...blockProps}>
-				<InnerBlocks {...innerBlocksProps} />
+				{/* <ServerSideRender block="wpdev/test-pattern" /> */}
+				<Placeholder label="All Patterns" />
 			</div>
 		</>
 	);
