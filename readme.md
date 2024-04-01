@@ -1,6 +1,6 @@
-# Block Pattern Plugin
+# Block Pattern Plugin (Experimental)
 
-Experimental plugin to store some pattern management features. This should never be used in production.
+Experimental plugin to store some pattern management features that I'm testing out. This should never be used in production and **features may be changed/removed at any time**.
 
 ## Features
 
