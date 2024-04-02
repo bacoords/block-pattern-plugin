@@ -1,9 +1,51 @@
 import { registerBlockVariation } from "@wordpress/blocks";
-import { BlockControls } from "@wordpress/block-editor";
-import { ToolbarButton } from "@wordpress/components";
+import {
+	BlockControls,
+	InspectorAdvancedControls,
+} from "@wordpress/block-editor";
+import {
+	ToolbarButton,
+	ToolbarGroup,
+	ToggleControl,
+} from "@wordpress/components";
 import { addFilter } from "@wordpress/hooks";
 import { createHigherOrderComponent } from "@wordpress/compose";
 
+/**
+ * Add the attribute to the block.
+ * This is the attribute that will be saved to the database.
+ *
+ * @param {object} settings block settings
+ * @param {string} name block name
+ * @returns {object} modified settings
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/#blocks-registerblocktype
+ */
+addFilter(
+	"blocks.registerBlockType",
+	"wpdev/toggle-content-lock/attributes",
+	function (settings, name) {
+		if (name !== "core/group") {
+			return settings;
+		}
+
+		return {
+			...settings,
+			attributes: {
+				...settings.attributes,
+				showContentLock: {
+					type: "boolean",
+					default: false,
+				},
+			},
+		};
+	},
+);
+
+/**
+ * Registers a custom block variation for the Group block.
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-variations/
+ */
 registerBlockVariation("core/group", {
 	name: "pattern-container",
 	title: "Pattern Container",
@@ -29,6 +71,7 @@ registerBlockVariation("core/group", {
 			"core/group",
 			{
 				templateLock: "",
+				showContentLock: true,
 				layout: { type: "constrained" },
 			},
 			[["core/paragraph", { placeholder: "Content locked" }]],
@@ -55,12 +98,27 @@ function ContentToggleEdit(props) {
 	};
 
 	const buttonText =
-		attributes.templateLock === "contentOnly" ? "Advanced" : "Lock Content";
+		attributes.templateLock === "contentOnly"
+			? "Advanced Editing"
+			: "Lock Content";
 
 	return (
-		<BlockControls>
-			<ToolbarButton text={buttonText} onClick={toggleContentLock} />
-		</BlockControls>
+		<>
+			{attributes.showContentLock && (
+				<BlockControls>
+					<ToolbarGroup>
+						<ToolbarButton text={buttonText} onClick={toggleContentLock} />
+					</ToolbarGroup>
+				</BlockControls>
+			)}
+			<InspectorAdvancedControls>
+				<ToggleControl
+					label="Show Content Lock"
+					checked={attributes.showContentLock}
+					onChange={(showContentLock) => setAttributes({ showContentLock })}
+				/>
+			</InspectorAdvancedControls>
+		</>
 	);
 }
 

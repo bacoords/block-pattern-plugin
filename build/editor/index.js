@@ -155,6 +155,37 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+/**
+ * Add the attribute to the block.
+ * This is the attribute that will be saved to the database.
+ *
+ * @param {object} settings block settings
+ * @param {string} name block name
+ * @returns {object} modified settings
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/#blocks-registerblocktype
+ */
+(0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__.addFilter)("blocks.registerBlockType", "wpdev/toggle-content-lock/attributes", function (settings, name) {
+  if (name !== "core/group") {
+    return settings;
+  }
+  return {
+    ...settings,
+    attributes: {
+      ...settings.attributes,
+      showContentLock: {
+        type: "boolean",
+        default: false
+      }
+    }
+  };
+});
+
+/**
+ * Registers a custom block variation for the Group block.
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-variations/
+ */
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockVariation)("core/group", {
   name: "pattern-container",
   title: "Pattern Container",
@@ -181,6 +212,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   innerBlocks: [["core/group", {
     templateLock: "",
+    showContentLock: true,
     layout: {
       type: "constrained"
     }
@@ -210,11 +242,17 @@ function ContentToggleEdit(props) {
       templateLock: isLocked ? "" : "contentOnly"
     });
   };
-  const buttonText = attributes.templateLock === "contentOnly" ? "Advanced" : "Lock Content";
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarButton, {
+  const buttonText = attributes.templateLock === "contentOnly" ? "Advanced Editing" : "Lock Content";
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, attributes.showContentLock && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarButton, {
     text: buttonText,
     onClick: toggleContentLock
-  }));
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorAdvancedControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    label: "Show Content Lock",
+    checked: attributes.showContentLock,
+    onChange: showContentLock => setAttributes({
+      showContentLock
+    })
+  })));
 }
 (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__.addFilter)("editor.BlockEdit", "wpdev/toggle-content-lock", (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_5__.createHigherOrderComponent)(BlockEdit => {
   return props => {
