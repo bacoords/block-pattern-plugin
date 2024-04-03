@@ -15,14 +15,7 @@
 				'categories' => 'Categories',
 			)
 		);
-		if ( $data['title'] ) :
-			?>
-				<div class="wp-block-group has-global-padding" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--sm);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--sm)">
-					<h2><?php echo esc_html( $data['title'] ); ?></h2>
-				</div>
-			<?php endif; ?>
-			<?php
-			include $pattern_path; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		include $pattern_path; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	endforeach;
 
 	$patterns = new WP_Query(
@@ -35,11 +28,6 @@
 	if ( $patterns->have_posts() ) :
 		while ( $patterns->have_posts() ) :
 			$patterns->the_post();
-			?>
-				<div class="wp-block-group has-global-padding" style="padding-top:var(--wp--preset--spacing--xl);padding-right:var(--wp--preset--spacing--sm);padding-bottom:var(--wp--preset--spacing--xl);padding-left:var(--wp--preset--spacing--sm)">
-					<h2><?php the_title(); ?></h2>
-				</div>
-			<?php
 			the_content();
 		endwhile;
 	endif;

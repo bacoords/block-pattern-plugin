@@ -215,6 +215,9 @@ __webpack_require__.r(__webpack_exports__);
     showContentLock: true,
     layout: {
       type: "constrained"
+    },
+    metadata: {
+      name: "Inner Container"
     }
   }, [["core/paragraph", {
     placeholder: "Content locked"

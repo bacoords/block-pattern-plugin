@@ -73,6 +73,7 @@ registerBlockVariation("core/group", {
 				templateLock: "",
 				showContentLock: true,
 				layout: { type: "constrained" },
+				metadata: { name: "Inner Container" },
 			},
 			[["core/paragraph", { placeholder: "Content locked" }]],
 		],
