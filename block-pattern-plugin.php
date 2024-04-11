@@ -108,3 +108,33 @@ function register_block_templates() {
 	);
 }
 add_action( 'init', __NAMESPACE__ . '\register_block_templates' );
+
+
+
+/**
+ * Remove the theme's ("locked") block patterns from showing up in the block/site editor.
+ *
+ * @return void
+ */
+function wpdocs_remove_theme_patterns_from_showing_up_in_editor() {
+
+	$pattern_paths = glob( get_stylesheet_directory() . '/patterns/*.php' );
+	$pattern_slugs = array_map(
+		function ( $path ) {
+			$data = get_file_data(
+				$path,
+				array(
+					'title'      => 'Title',
+					'slug'       => 'Slug',
+					'categories' => 'Categories',
+				)
+			);
+			return $data['slug'];
+		},
+		$pattern_paths
+	);
+	foreach ( $pattern_slugs as $core_block_pattern ) {
+		unregister_block_pattern( $core_block_pattern );
+	}
+}
+add_action( 'init', __NAMESPACE__ . '\wpdocs_remove_theme_patterns_from_showing_up_in_editor' );
