@@ -13,7 +13,7 @@ import { __ } from "@wordpress/i18n";
  */
 import { useBlockProps } from "@wordpress/block-editor";
 
-import { Placeholder } from "@wordpress/components";
+import { Placeholder, ToggleControl } from "@wordpress/components";
 
 import ServerSideRender from "@wordpress/server-side-render";
 
@@ -39,7 +39,29 @@ export default function Edit({ attributes, setAttributes }) {
 		<>
 			<div {...blockProps}>
 				{/* <ServerSideRender block="wpdev/test-pattern" /> */}
-				<Placeholder label="All Patterns" />
+				<Placeholder label="All Patterns">
+					<div>
+						<ToggleControl
+							checked={attributes.showPatternsInTheme}
+							label={__("Show Theme Patterns")}
+							onChange={(showPatternsInTheme) => {
+								setAttributes({
+									showPatternsInTheme: showPatternsInTheme,
+								});
+							}}
+						/>
+
+						<ToggleControl
+							checked={attributes.showPatternsInDB}
+							label={__("Show Stored Patterns")}
+							onChange={(showPatternsInDB) => {
+								setAttributes({
+									showPatternsInDB: showPatternsInDB,
+								});
+							}}
+						/>
+					</div>
+				</Placeholder>
 			</div>
 		</>
 	);

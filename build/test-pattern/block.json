@@ -21,6 +21,14 @@
     "align": {
       "type": "string",
       "default": "full"
+    },
+    "showPatternsInTheme": {
+      "type": "boolean",
+      "default": true
+    },
+    "showPatternsInDB": {
+      "type": "boolean",
+      "default": true
     }
   },
   "textdomain": "test-pattern",

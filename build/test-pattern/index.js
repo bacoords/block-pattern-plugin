@@ -66,7 +66,23 @@ function Edit({
     ...blockProps
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Placeholder, {
     label: "All Patterns"
-  })));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    checked: attributes.showPatternsInTheme,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Theme Patterns"),
+    onChange: showPatternsInTheme => {
+      setAttributes({
+        showPatternsInTheme: showPatternsInTheme
+      });
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    checked: attributes.showPatternsInDB,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Stored Patterns"),
+    onChange: showPatternsInDB => {
+      setAttributes({
+        showPatternsInDB: showPatternsInDB
+      });
+    }
+  })))));
 }
 
 /***/ }),
@@ -208,7 +224,7 @@ module.exports = window["wp"]["serverSideRender"];
   \*************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wpdev/test-pattern","version":"0.1.0","title":"Show ALL Patterns","category":"design","icon":"welcome-view-site","description":"Quick block to show all of your patterns on the frontend of your site.","example":{},"supports":{"html":false,"align":["full"],"spacing":{"padding":true}},"attributes":{"align":{"type":"string","default":"full"}},"textdomain":"test-pattern","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wpdev/test-pattern","version":"0.1.0","title":"Show ALL Patterns","category":"design","icon":"welcome-view-site","description":"Quick block to show all of your patterns on the frontend of your site.","example":{},"supports":{"html":false,"align":["full"],"spacing":{"padding":true}},"attributes":{"align":{"type":"string","default":"full"},"showPatternsInTheme":{"type":"boolean","default":true},"showPatternsInDB":{"type":"boolean","default":true}},"textdomain":"test-pattern","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php"}');
 
 /***/ })
 
