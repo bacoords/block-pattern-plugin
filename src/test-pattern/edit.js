@@ -11,9 +11,15 @@ import { __ } from "@wordpress/i18n";
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from "@wordpress/block-editor";
+import { useBlockProps, InspectorControls } from "@wordpress/block-editor";
 
-import { Placeholder, ToggleControl } from "@wordpress/components";
+import {
+	Placeholder,
+	ToggleControl,
+	TextControl,
+	PanelBody,
+	PanelRow,
+} from "@wordpress/components";
 
 import ServerSideRender from "@wordpress/server-side-render";
 
@@ -37,31 +43,64 @@ export default function Edit({ attributes, setAttributes }) {
 	const blockProps = useBlockProps();
 	return (
 		<>
+			<InspectorControls>
+				<PanelBody title={__("Pattern Options")} initialOpen={true}>
+					<PanelRow>
+						<ToggleControl
+							checked={attributes.showSinglePattern}
+							label={__("Show A Single Pattern")}
+							onChange={(showSinglePattern) => {
+								setAttributes({
+									showSinglePattern: showSinglePattern,
+								});
+							}}
+						/>
+					</PanelRow>
+					{attributes.showSinglePattern && (
+						<>
+							<TextControl
+								label={__("Pattern Name")}
+								value={attributes.singlePatternName}
+								onChange={(singlePatternName) => {
+									setAttributes({
+										singlePatternName: singlePatternName,
+									});
+								}}
+							/>
+						</>
+					)}
+
+					{!attributes.showSinglePattern && (
+						<>
+							<PanelRow>
+								<ToggleControl
+									checked={attributes.showPatternsInTheme}
+									label={__("Show Theme Patterns")}
+									onChange={(showPatternsInTheme) => {
+										setAttributes({
+											showPatternsInTheme: showPatternsInTheme,
+										});
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<ToggleControl
+									checked={attributes.showPatternsInDB}
+									label={__("Show Stored Patterns")}
+									onChange={(showPatternsInDB) => {
+										setAttributes({
+											showPatternsInDB: showPatternsInDB,
+										});
+									}}
+								/>
+							</PanelRow>
+						</>
+					)}
+				</PanelBody>
+			</InspectorControls>
 			<div {...blockProps}>
 				{/* <ServerSideRender block="wpdev/test-pattern" /> */}
-				<Placeholder label="All Patterns">
-					<div>
-						<ToggleControl
-							checked={attributes.showPatternsInTheme}
-							label={__("Show Theme Patterns")}
-							onChange={(showPatternsInTheme) => {
-								setAttributes({
-									showPatternsInTheme: showPatternsInTheme,
-								});
-							}}
-						/>
-
-						<ToggleControl
-							checked={attributes.showPatternsInDB}
-							label={__("Show Stored Patterns")}
-							onChange={(showPatternsInDB) => {
-								setAttributes({
-									showPatternsInDB: showPatternsInDB,
-								});
-							}}
-						/>
-					</div>
-				</Placeholder>
+				<Placeholder label="All Patterns"></Placeholder>
 			</div>
 		</>
 	);

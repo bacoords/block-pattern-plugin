@@ -27,6 +27,14 @@
 		"showPatternsInDB":{
 			"type": "boolean",
 			"default" : true
+		},
+		"showSinglePattern":{
+			"type": "boolean",
+			"default" : false
+		},
+		"singlePatternName":{
+			"type": "string",
+			"default" : ""
 		}
 	},
 	"textdomain": "test-pattern",

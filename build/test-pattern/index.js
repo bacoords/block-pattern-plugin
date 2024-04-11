@@ -62,11 +62,26 @@ function Edit({
   setAttributes
 }) {
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    ...blockProps
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Placeholder, {
-    label: "All Patterns"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pattern Options"),
+    initialOpen: true
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    checked: attributes.showSinglePattern,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show A Single Pattern"),
+    onChange: showSinglePattern => {
+      setAttributes({
+        showSinglePattern: showSinglePattern
+      });
+    }
+  })), attributes.showSinglePattern && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pattern Name"),
+    value: attributes.singlePatternName,
+    onChange: singlePatternName => {
+      setAttributes({
+        singlePatternName: singlePatternName
+      });
+    }
+  })), !attributes.showSinglePattern && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
     checked: attributes.showPatternsInTheme,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Theme Patterns"),
     onChange: showPatternsInTheme => {
@@ -74,7 +89,7 @@ function Edit({
         showPatternsInTheme: showPatternsInTheme
       });
     }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
     checked: attributes.showPatternsInDB,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Stored Patterns"),
     onChange: showPatternsInDB => {
@@ -82,7 +97,11 @@ function Edit({
         showPatternsInDB: showPatternsInDB
       });
     }
-  })))));
+  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    ...blockProps
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Placeholder, {
+    label: "All Patterns"
+  })));
 }
 
 /***/ }),
@@ -224,7 +243,7 @@ module.exports = window["wp"]["serverSideRender"];
   \*************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wpdev/test-pattern","version":"0.1.0","title":"Show ALL Patterns","category":"design","icon":"welcome-view-site","description":"Quick block to show all of your patterns on the frontend of your site.","example":{},"supports":{"html":false,"align":["full"],"spacing":{"padding":true}},"attributes":{"align":{"type":"string","default":"full"},"showPatternsInTheme":{"type":"boolean","default":true},"showPatternsInDB":{"type":"boolean","default":true}},"textdomain":"test-pattern","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wpdev/test-pattern","version":"0.1.0","title":"Show ALL Patterns","category":"design","icon":"welcome-view-site","description":"Quick block to show all of your patterns on the frontend of your site.","example":{},"supports":{"html":false,"align":["full"],"spacing":{"padding":true}},"attributes":{"align":{"type":"string","default":"full"},"showPatternsInTheme":{"type":"boolean","default":true},"showPatternsInDB":{"type":"boolean","default":true},"showSinglePattern":{"type":"boolean","default":false},"singlePatternName":{"type":"string","default":""}},"textdomain":"test-pattern","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php"}');
 
 /***/ })
 
