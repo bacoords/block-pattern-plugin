@@ -15,6 +15,10 @@
 				'categories' => 'Categories',
 			)
 		);
+		do_action( 'qm/debug', $data );
+		if ( 'hidden' === $data['categories'] ) {
+			continue;
+		}
 		include $pattern_path; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	endforeach;
 
@@ -22,6 +26,14 @@
 		array(
 			'post_type'      => 'wp_block',
 			'posts_per_page' => -1,
+			'tax_query'      => array(
+				array(
+					'taxonomy' => 'wp_pattern_category',
+					'field'    => 'slug',
+					'terms'    => 'page,hidden',
+					'operator' => 'NOT IN',
+				),
+			),
 		)
 	);
 

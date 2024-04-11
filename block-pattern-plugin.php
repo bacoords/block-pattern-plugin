@@ -46,3 +46,65 @@ function enqueue_custom_block_editor_modifications() {
 	);
 }
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_custom_block_editor_modifications' );
+
+
+
+/**
+ * Register custom block templates.
+ *
+ * @return void
+ */
+function register_block_templates() {
+	$post_type_object           = get_post_type_object( 'wp_block' );
+	$post_type_object->template = array(
+		array(
+			'core/group',
+			array(
+				'tagName'  => 'section',
+				'metadata' => array(
+					'name' => 'Pattern',
+				),
+				'align'    => 'full',
+				'style'    => array(
+					'spacing' => array(
+						'padding' => array(
+							'top'    => 'var:preset|spacing|xl',
+							'bottom' => 'var:preset|spacing|xl',
+							'left'   => 'var:preset|spacing|sm',
+							'right'  => 'var:preset|spacing|sm',
+						),
+					),
+				),
+				'layout'   => array(
+					'type' => 'default',
+				),
+			),
+			array(
+				array(
+					'core/group',
+					array(
+						'templateLock'    => '',
+						'metadata'        => array(
+							'name' => 'Inner Container',
+						),
+						'layout'          => array(
+							'type' => 'constrained',
+						),
+						'showContentLock' => true,
+					),
+					array(
+						array(
+							'core/paragraph',
+							array(
+								'placeholder' => 'Content locked',
+							),
+							array(),
+						),
+
+					),
+				),
+			),
+		),
+	);
+}
+add_action( 'init', __NAMESPACE__ . '\register_block_templates' );
