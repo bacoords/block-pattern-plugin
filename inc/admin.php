@@ -74,7 +74,12 @@ function show_sync_status_column( string $column_name, int $post_id ) {
 add_action( 'manage_wp_block_posts_custom_column', __NAMESPACE__ . '\show_sync_status_column', 10, 2 );
 
 
-
+/**
+ * Get the sync status of a pattern.
+ *
+ * @param integer $post_id The post ID.
+ * @return boolean
+ */
 function get_pattern_sync_status( int $post_id ): bool {
 
 	// Compare the pattern in the filesystem with the post content.
@@ -93,20 +98,48 @@ function get_pattern_sync_status( int $post_id ): bool {
 		return false;
 	}
 
-	$pattern_file_content = file_get_contents( $pattern_file );
+	$pattern_file_content = file_get_contents( $pattern_file ); // phpcs:ignore
 
 	// Strip out the first php tag.
 	$pattern_file_content = substr( $pattern_file_content, strpos( $pattern_file_content, '?>' ) + 3 );
 
-	// Remove trailing whitespace
+	// Remove trailing whitespace.
 	$pattern_content      = trim( $pattern_content );
 	$pattern_file_content = trim( $pattern_file_content );
 
 	if ( $pattern_content !== $pattern_file_content ) {
-		do_action( 'qm/debug', $pattern_file_content );
-		do_action( 'qm/debug', $pattern_content );
 		return false;
 	}
 
 	return true;
 }
+
+
+
+
+/**
+ * Adds duplicate links and re-adds quick edit link.
+ *
+ * @since 1.0.0
+ *
+ * @param array    $actions Array of actions.
+ * @param \WP_Post $post    Post object.
+ *
+ * @return array
+ */
+function add_post_row_actions( array $actions, \WP_Post $post ) {
+	if ( 'wp_block' === $post->post_type ) {
+		$actions['site_editor'] = sprintf(
+			'<a href="%s" aria-label="%s">%s</a>',
+			admin_url(
+				'site-editor.php?postType=wp_block&postId=' . $post->ID
+			),
+			/* translators: %s: Post title. */
+				esc_attr( sprintf( __( 'Site Editor &#8220;%s&#8221;', 'pattern-editor' ), $post->post_title ) ),
+			__( 'Site Editor', 'pattern-editor' )
+		);
+	}
+
+		return $actions;
+}
+add_filter( 'post_row_actions', __NAMESPACE__ . '\add_post_row_actions', 10, 2 );
