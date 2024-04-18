@@ -127,7 +127,7 @@ function replace_image_paths( string $html, string $content_dir ): string {
 	$upload_dir  = wp_upload_dir();
 	$content_dir = trailingslashit( $content_dir );
 	$stylesheet  = get_stylesheet();
-	$setting     = apply_filters( 'blockify_image_export_dir', "themes/$stylesheet/assets" );
+	$setting     = "themes/$stylesheet/assets";
 
 	// Remove trailing slashes.
 	$setting   = implode( DIRECTORY_SEPARATOR, explode( DIRECTORY_SEPARATOR, $setting ) );
@@ -268,7 +268,6 @@ function export_pattern( int $post_ID, \WP_Post $post, bool $update ): int {
 
 	$content = $post->post_content ?? '';
 	$content = generate_pattern_content_export( $content );
-	$content = apply_filters( 'blockify_pattern_export_content', $content, $post, $categories[0] );
 
 	$block_types = '';
 
@@ -292,12 +291,6 @@ function export_pattern( int $post_ID, \WP_Post $post, bool $update ): int {
 
 	if ( ! file_exists( $pattern_dir ) ) {
 		wp_mkdir_p( $pattern_dir );
-	}
-
-	$use_category_dirs = apply_filters( 'blockify_pattern_export_use_category_dirs', true );
-
-	if ( $use_category_dirs && ! file_exists( $pattern_dir . $categories[0] ) ) {
-		wp_mkdir_p( $pattern_dir . $categories[0] );
 	}
 
 	global $wp_filesystem;
@@ -330,7 +323,7 @@ EOF;
 	$header_comment .= "?>\n";
 
 	$wp_filesystem->put_contents(
-		$pattern_dir . ( $use_category_dirs ? $categories[0] . DIRECTORY_SEPARATOR : '' ) . $slug . '.php',
+		$pattern_dir . $slug . '.php',
 		$header_comment . $content
 	);
 
@@ -357,16 +350,5 @@ function get_pattern_dir( \WP_Post $post = null, string $content = '' ): string 
 	$stylesheet  = get_stylesheet();
 	$default_dir = trailingslashit( dirname( get_template_directory(), 2 ) ) . "themes/$stylesheet/patterns";
 
-	/**
-	 * Filters the pattern directory.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string   $default_dir Filtered pattern directory.
-	 * @param ?WP_Post $post        Post object (optional).
-	 * @param ?string  $content     Replaced content (optional).
-	 */
-	$filtered_dir = apply_filters( 'blockify_pattern_export_dir', $default_dir, $post, $content );
-
-	return esc_html( trailingslashit( $filtered_dir ) );
+	return esc_html( trailingslashit( $default_dir ) );
 }
