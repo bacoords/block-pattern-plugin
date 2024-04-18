@@ -215,7 +215,20 @@ function replace_image_paths( string $html, string $content_dir ): string {
 	return $html;
 }
 
-add_action( 'save_post_wp_block', __NAMESPACE__ . '\export_pattern', 10, 3 );
+
+function generate_pattern_content_export( string $content ) {
+
+	$content_dir = trailingslashit( dirname( get_template_directory(), 2 ) );
+
+	$content = replace_image_paths( $content, $content_dir );
+	$content = replace_nav_menu_refs( $content );
+	$content = replace_reusable_blocks( $content );
+	$content = preg_replace( "/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $content );
+	return $content;
+}
+
+
+
 /**
  * Handles export pattern request.
  *
@@ -253,13 +266,9 @@ function export_pattern( int $post_ID, \WP_Post $post, bool $update ): int {
 	$categories = get_the_terms( $post_ID, 'wp_pattern_category' );
 	$categories = ( ! is_wp_error( $categories ) && is_array( $categories ) ) ? wp_list_pluck( $categories, 'slug' ) : array( 'uncategorized' );
 
-	$content_dir = trailingslashit( dirname( get_template_directory(), 2 ) );
-	$content     = $post->post_content ?? '';
-	$content     = replace_image_paths( $content, $content_dir );
-	$content     = replace_nav_menu_refs( $content );
-	$content     = replace_reusable_blocks( $content );
-	$content     = preg_replace( "/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $content );
-	$content     = apply_filters( 'blockify_pattern_export_content', $content, $post, $categories[0] );
+	$content = $post->post_content ?? '';
+	$content = generate_pattern_content_export( $content );
+	$content = apply_filters( 'blockify_pattern_export_content', $content, $post, $categories[0] );
 
 	$block_types = '';
 
@@ -329,6 +338,8 @@ EOF;
 
 	return $post_ID;
 }
+add_action( 'save_post_wp_block', __NAMESPACE__ . '\export_pattern', 10, 3 );
+
 
 
 /**
