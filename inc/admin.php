@@ -140,6 +140,6 @@ function add_post_row_actions( array $actions, \WP_Post $post ) {
 		);
 	}
 
-		return $actions;
+	return $actions;
 }
 add_filter( 'post_row_actions', __NAMESPACE__ . '\add_post_row_actions', 10, 2 );
