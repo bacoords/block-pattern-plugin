@@ -135,8 +135,8 @@ function add_post_row_actions( array $actions, \WP_Post $post ) {
 				'site-editor.php?postType=wp_block&postId=' . $post->ID
 			),
 			/* translators: %s: Post title. */
-				esc_attr( sprintf( __( 'Site Editor &#8220;%s&#8221;', 'pattern-editor' ), $post->post_title ) ),
-			__( 'Site Editor', 'pattern-editor' )
+				esc_attr( sprintf( __( 'Open &#8220;%s&#8221; in Site Editor', 'pattern-editor' ), $post->post_title ) ),
+			__( 'Open in Site Editor', 'pattern-editor' )
 		);
 	}
 
