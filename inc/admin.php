@@ -22,6 +22,22 @@ function add_admin_menu_link() {
 		'dashicons-layout',
 		30
 	);
+
+	add_submenu_page(
+		admin_url( 'edit.php?post_type=wp_block' ),
+		__( 'All Patterns', 'wpdev' ),
+		__( 'All Patterns', 'wpdev' ),
+		'manage_options',
+		admin_url( 'edit.php?post_type=wp_block' )
+	);
+
+	add_submenu_page(
+		admin_url( 'edit.php?post_type=wp_block' ),
+		__( 'Site Editor Patterns', 'wpdev' ),
+		__( 'Site Editor Patterns', 'wpdev' ),
+		'manage_options',
+		admin_url( 'site-editor.php?path=%2Fpatterns' )
+	);
 }
 add_action( 'admin_menu', __NAMESPACE__ . '\add_admin_menu_link' );
 
