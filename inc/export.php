@@ -331,9 +331,8 @@ EOF;
 
 	return $post_ID;
 }
-if ( 'local' === wp_get_environment_type() ) {
-	add_action( 'save_post_wp_block', __NAMESPACE__ . '\export_pattern', 10, 3 );
-}
+add_action( 'save_post_wp_block', __NAMESPACE__ . '\export_pattern', 10, 3 );
+
 
 
 
