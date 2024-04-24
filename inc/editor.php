@@ -129,4 +129,4 @@ function wpdocs_remove_theme_patterns_from_showing_up_in_editor() {
 		unregister_block_pattern( $core_block_pattern );
 	}
 }
-add_action( 'rest_api_init', __NAMESPACE__ . '\wpdocs_remove_theme_patterns_from_showing_up_in_editor' );
+// add_action( 'rest_api_init', __NAMESPACE__ . '\wpdocs_remove_theme_patterns_from_showing_up_in_editor' );
