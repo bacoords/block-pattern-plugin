@@ -28,9 +28,9 @@ Patterns in your theme are hidden from the site editor, but patterns in your dat
 
 ## Blocks / Block Variations
 
-### ContentOnly Lock Toggle in Block Toolbar
+### "Advanced" Lock Toggle in Block Toolbar / Post Toolbar
 
-Adds a setting on Group blocks that allows you to show an "Advanced Editing" button on that block's toolbar. The "Advanced Editing" button allows you to quickly toggle the `contentOnly` lock on and off instead of using the "lock" button.
+An "Advanced Editing" button at the top of the block editor allows you to quickly toggle the `contentOnly` lock on and off instead of using the "lock" button. Group blocks can opt into this behavior by checking the "Uses Advanced Editing Lock" toggle in the Advanced Inspector Controls.
 
 ### "Pattern Container" Group Block Variation
 
