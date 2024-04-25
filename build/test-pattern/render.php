@@ -36,7 +36,7 @@ do_action( 'qm/debug', $attributes );
 			array(
 				'post_type'      => 'wp_block',
 				'posts_per_page' => -1,
-				'tax_query'      => array(
+				'tax_query'      => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 					array(
 						'taxonomy' => 'wp_pattern_category',
 						'field'    => 'slug',
@@ -57,6 +57,6 @@ do_action( 'qm/debug', $attributes );
 	endif;
 
 	$content = ob_get_clean();
-	echo do_blocks( $content );
+	echo wp_kses_post( do_blocks( $content ) );
 	?>
 </div>
