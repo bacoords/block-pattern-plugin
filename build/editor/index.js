@@ -159,9 +159,9 @@ const AdvancedEditingButton = ({
 
     // add empty div to the toolbar so we can fill it.
     editorToolbar.appendChild(buttonWrapper);
-    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.render)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(AdvancedEditingButton, {
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createRoot)(buttonWrapper).render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(AdvancedEditingButton, {
       visibility: true
-    }), document.getElementById("wpdev-advanced-editing-button-wrapper"));
+    }));
   });
 });
 

@@ -1,4 +1,4 @@
-import { render, useState } from "@wordpress/element";
+import { useState, createRoot } from "@wordpress/element";
 import { Button } from "@wordpress/components";
 
 import { subscribe, useDispatch } from "@wordpress/data";
@@ -87,10 +87,8 @@ subscribe(() => {
 
 		// add empty div to the toolbar so we can fill it.
 		editorToolbar.appendChild(buttonWrapper);
-
-		render(
+		createRoot(buttonWrapper).render(
 			<AdvancedEditingButton visibility={true} />,
-			document.getElementById("wpdev-advanced-editing-button-wrapper"),
 		);
 	});
 });
