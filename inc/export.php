@@ -327,8 +327,6 @@ EOF;
 		$header_comment . $content
 	);
 
-	flush_rewrite_rules();
-
 	return $post_ID;
 }
 add_action( 'save_post_wp_block', __NAMESPACE__ . '\export_pattern', 10, 3 );

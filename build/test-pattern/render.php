@@ -7,7 +7,7 @@ $show_theme  = isset( $attributes['showPatternsInTheme'] ) ? $attributes['showPa
 $show_db     = isset( $attributes['showPatternsInDB'] ) ? $attributes['showPatternsInDB'] : true;
 do_action( 'qm/debug', $attributes );
 ?>
-<div <?php echo get_block_wrapper_attributes( array( 'class' => 'alignfull is-layout-constrained has-global-padding' ) ); ?>>
+<div <?php echo get_block_wrapper_attributes( array( 'class' => 'alignfull is-layout-constrained has-global-padding' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<?php
 	ob_start();
 	if ( $show_single ) :
