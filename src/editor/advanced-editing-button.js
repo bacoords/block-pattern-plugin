@@ -5,6 +5,7 @@ import { subscribe, useDispatch } from "@wordpress/data";
 import { store as noticesStore } from "@wordpress/notices";
 import domReady from "@wordpress/dom-ready";
 import { __ } from "@wordpress/i18n";
+import { lock, unlock } from "@wordpress/icons";
 
 const AdvancedEditingButton = ({ visibility }) => {
 	const [contentLock, setContentLock] = useState(true);
@@ -49,8 +50,9 @@ const AdvancedEditingButton = ({ visibility }) => {
 				variant="secondary"
 				className="components-button"
 				onClick={toggleContentLock}
+				icon={contentLock ? lock : unlock}
 			>
-				{contentLock ? "Advanced Mode" : "Lock Content"}
+				{contentLock ? "Locked Mode" : "Unlocked Mode"}
 			</Button>
 		</>
 	);
