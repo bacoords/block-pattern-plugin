@@ -36,7 +36,7 @@ function add_admin_menu_link() {
 		__( 'Site Editor Patterns', 'wpdev' ),
 		__( 'Site Editor Patterns', 'wpdev' ),
 		'manage_options',
-		admin_url( 'site-editor.php?path=%2Fpatterns' )
+		admin_url( 'site-editor.php?path=%2Fpatterns&categoryId=my-patterns' )
 	);
 }
 add_action( 'admin_menu', __NAMESPACE__ . '\add_admin_menu_link' );
