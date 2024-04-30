@@ -10,6 +10,7 @@ import {
 import { addFilter } from "@wordpress/hooks";
 import { createHigherOrderComponent } from "@wordpress/compose";
 import { __ } from "@wordpress/i18n";
+import { useEffect } from "@wordpress/element";
 
 /**
  * Add the attribute to the block.
@@ -65,15 +66,21 @@ function ContentToggleEdit(props) {
 			? "Advanced Editing"
 			: "Lock Content";
 
+	useEffect(() => {
+		if (attributes.showContentLock) {
+			props.attributes.templateLock = "contentOnly";
+		}
+	}, []);
+
 	return (
 		<>
-			{attributes.showContentLock && (
+			{/* {attributes.showContentLock && (
 				<BlockControls>
 					<ToolbarGroup>
 						<ToolbarButton text={buttonText} onClick={toggleContentLock} />
 					</ToolbarGroup>
 				</BlockControls>
-			)}
+			)} */}
 
 			<InspectorAdvancedControls>
 				<ToggleControl

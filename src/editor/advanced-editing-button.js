@@ -5,7 +5,7 @@ import { subscribe, useDispatch } from "@wordpress/data";
 import { store as noticesStore } from "@wordpress/notices";
 import domReady from "@wordpress/dom-ready";
 import { __ } from "@wordpress/i18n";
-import { edit, lock, unlock } from "@wordpress/icons";
+import { lock, unlock } from "@wordpress/icons";
 
 const AdvancedEditingButton = ({ visibility }) => {
 	const [contentLock, setContentLock] = useState(true);
