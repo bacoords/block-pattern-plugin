@@ -5,7 +5,7 @@ import { subscribe, useDispatch } from "@wordpress/data";
 import { store as noticesStore } from "@wordpress/notices";
 import domReady from "@wordpress/dom-ready";
 import { __ } from "@wordpress/i18n";
-import { lock, unlock } from "@wordpress/icons";
+import { edit, lock, unlock } from "@wordpress/icons";
 
 const AdvancedEditingButton = ({ visibility }) => {
 	const [contentLock, setContentLock] = useState(true);
@@ -74,9 +74,11 @@ subscribe(() => {
 
 	domReady(() => {
 		const editorToolbar = document.querySelector(".edit-post-header__toolbar");
-
+		const siteEditorToolbar = document.querySelector(
+			".edit-site-header-edit-mode__actions",
+		);
 		// If toolbar doesn't exist, we can't continue
-		if (!editorToolbar) {
+		if (!editorToolbar && !siteEditorToolbar) {
 			return;
 		}
 		// So turns out you can't append to an existing container without
@@ -86,7 +88,8 @@ subscribe(() => {
 		buttonWrapper.style.cssText = "display:flex;";
 
 		// add empty div to the toolbar so we can fill it.
-		editorToolbar.appendChild(buttonWrapper);
+		editorToolbar?.appendChild(buttonWrapper);
+		siteEditorToolbar?.appendChild(buttonWrapper);
 		createRoot(buttonWrapper).render(
 			<AdvancedEditingButton visibility={true} />,
 		);

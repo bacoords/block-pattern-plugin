@@ -28,10 +28,10 @@ domReady(() => {
 			style: {
 				spacing: {
 					padding: {
-						top: "var:preset|spacing|xl",
-						bottom: "var:preset|spacing|xl",
-						left: "var:preset|spacing|sm",
-						right: "var:preset|spacing|sm",
+						top: "var:preset|spacing|40",
+						bottom: "var:preset|spacing|40",
+						left: "var:preset|spacing|20",
+						right: "var:preset|spacing|20",
 					},
 				},
 			},

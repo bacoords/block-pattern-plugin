@@ -146,9 +146,9 @@ const AdvancedEditingButton = ({
   }
   _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_5___default()(() => {
     const editorToolbar = document.querySelector(".edit-post-header__toolbar");
-
+    const siteEditorToolbar = document.querySelector(".edit-site-header-edit-mode__actions");
     // If toolbar doesn't exist, we can't continue
-    if (!editorToolbar) {
+    if (!editorToolbar && !siteEditorToolbar) {
       return;
     }
     // So turns out you can't append to an existing container without
@@ -158,7 +158,8 @@ const AdvancedEditingButton = ({
     buttonWrapper.style.cssText = "display:flex;";
 
     // add empty div to the toolbar so we can fill it.
-    editorToolbar.appendChild(buttonWrapper);
+    editorToolbar?.appendChild(buttonWrapper);
+    siteEditorToolbar?.appendChild(buttonWrapper);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createRoot)(buttonWrapper).render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(AdvancedEditingButton, {
       visibility: true
     }));
@@ -502,10 +503,10 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1___default()(() => {
       style: {
         spacing: {
           padding: {
-            top: "var:preset|spacing|xl",
-            bottom: "var:preset|spacing|xl",
-            left: "var:preset|spacing|sm",
-            right: "var:preset|spacing|sm"
+            top: "var:preset|spacing|40",
+            bottom: "var:preset|spacing|40",
+            left: "var:preset|spacing|20",
+            right: "var:preset|spacing|20"
           }
         }
       }
