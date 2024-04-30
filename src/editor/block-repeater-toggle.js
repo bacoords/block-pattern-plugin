@@ -14,6 +14,7 @@ import { __ } from "@wordpress/i18n";
 import { useEffect } from "@wordpress/element";
 import { useSelect, useDispatch } from "@wordpress/data";
 import { createBlock } from "@wordpress/blocks";
+import { copy, trash } from "@wordpress/icons";
 
 const ALLOWED_BLOCKS = [
 	// "core/column",
@@ -146,8 +147,16 @@ function RepeaterToggleEdit(props) {
 			{attributes.showRepeaterToggle && (
 				<BlockControls>
 					<ToolbarGroup>
-						<ToolbarButton text={"Duplicate Block"} onClick={duplicateBlock} />
-						<ToolbarButton text={"Delete Block"} onClick={deleteBlock} />
+						<ToolbarButton
+							describedBy={"Duplicate Block"}
+							onClick={duplicateBlock}
+							icon={copy}
+						/>
+						<ToolbarButton
+							describedBy={"Delete Block"}
+							onClick={deleteBlock}
+							icon={trash}
+						/>
 					</ToolbarGroup>
 				</BlockControls>
 			)}
