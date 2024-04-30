@@ -21,7 +21,6 @@ define( 'BLOCK_PATTERN_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 require plugin_dir_path( __FILE__ ) . 'inc/editor.php';
 
-
 if ( 'local' === wp_get_environment_type() ) {
 	require plugin_dir_path( __FILE__ ) . 'inc/admin.php';
 	require plugin_dir_path( __FILE__ ) . 'inc/export.php';

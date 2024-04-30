@@ -1,5 +1,12 @@
-import { InspectorAdvancedControls } from "@wordpress/block-editor";
-import { ToggleControl } from "@wordpress/components";
+import {
+	InspectorAdvancedControls,
+	BlockControls,
+} from "@wordpress/block-editor";
+import {
+	ToggleControl,
+	ToolbarGroup,
+	ToolbarButton,
+} from "@wordpress/components";
 import { addFilter } from "@wordpress/hooks";
 import { createHigherOrderComponent } from "@wordpress/compose";
 import { __ } from "@wordpress/i18n";
@@ -48,8 +55,26 @@ addFilter(
 function ContentToggleEdit(props) {
 	const { attributes, setAttributes } = props;
 
+	const toggleContentLock = () => {
+		const isLocked = attributes.templateLock === "contentOnly";
+		setAttributes({ templateLock: isLocked ? "" : "contentOnly" });
+	};
+
+	const buttonText =
+		attributes.templateLock === "contentOnly"
+			? "Advanced Editing"
+			: "Lock Content";
+
 	return (
 		<>
+			{attributes.showContentLock && (
+				<BlockControls>
+					<ToolbarGroup>
+						<ToolbarButton text={buttonText} onClick={toggleContentLock} />
+					</ToolbarGroup>
+				</BlockControls>
+			)}
+
 			<InspectorAdvancedControls>
 				<ToggleControl
 					label={__("Uses Advanced Editing Lock", "wpdev")}
