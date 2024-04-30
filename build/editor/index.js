@@ -168,10 +168,10 @@ const AdvancedEditingButton = ({
 
 /***/ }),
 
-/***/ "./src/editor/content-toggle.js":
-/*!**************************************!*\
-  !*** ./src/editor/content-toggle.js ***!
-  \**************************************/
+/***/ "./src/editor/block-content-toggle.js":
+/*!********************************************!*\
+  !*** ./src/editor/block-content-toggle.js ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -272,6 +272,265 @@ function ContentToggleEdit(props) {
     }));
   };
 }));
+
+/***/ }),
+
+/***/ "./src/editor/block-repeater-toggle.js":
+/*!*********************************************!*\
+  !*** ./src/editor/block-repeater-toggle.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_8__);
+
+
+
+
+
+
+
+
+
+const ALLOWED_BLOCKS = [
+// "core/column",
+"core/button", "core/list-item"
+// "core/group",
+];
+
+/**
+ * Add the attribute to the block.
+ * This is the attribute that will be saved to the database.
+ *
+ * @param {object} settings block settings
+ * @param {string} name block name
+ * @returns {object} modified settings
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/#blocks-registerblocktype
+ */
+(0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__.addFilter)("blocks.registerBlockType", "wpdev/toggle-repeater/child-attributes", function (settings, name) {
+  if (!ALLOWED_BLOCKS.includes(name)) {
+    return settings;
+  }
+  return {
+    ...settings,
+    attributes: {
+      ...settings.attributes,
+      showRepeaterToggle: {
+        type: "boolean",
+        default: false,
+        __experimentalRole: "content"
+      }
+    },
+    usesContext: [...settings.usesContext, "wpdev/repeaterParentClientId"]
+  };
+});
+
+/**
+ * BlockEdit
+ *
+ * a react component that will get mounted in the Editor when the block is
+ * selected. It is recommended to use Slots like `BlockControls` or `InspectorControls`
+ * in here to put settings into the blocks toolbar or sidebar.
+ *
+ * @param {object} props block props
+ * @returns {JSX}
+ */
+function RepeaterToggleEdit(props) {
+  const {
+    attributes,
+    setAttributes,
+    clientId,
+    name
+  } = props;
+
+  // get function to select a given block
+  const {
+    selectBlock
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_7__.useDispatch)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.store);
+
+  // get the insertBlock function from the block editor
+  const {
+    insertBlock
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_7__.useDispatch)("core/block-editor");
+
+  // get the current block's position in the parent block
+  function getCurrentBlockPosition(block) {
+    return block.clientId === clientId;
+  }
+
+  // get the parent block's clientId and parent block
+  const {
+    firstParentClientId
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_7__.useSelect)(select => {
+    const {
+      getBlockName,
+      getBlockParents,
+      getSelectedBlockClientId
+    } = select(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.store);
+    const selectedBlockClientId = getSelectedBlockClientId();
+    const parents = getBlockParents(selectedBlockClientId);
+    const _firstParentClientId = parents[parents.length - 1];
+    return {
+      firstParentClientId: _firstParentClientId
+    };
+  }, []);
+
+  // get the parent block's inner blocks
+  const {
+    parentInnerBlocks
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_7__.useSelect)(select => ({
+    parentInnerBlocks: select("core/block-editor").getBlocks(firstParentClientId)
+  }));
+  const parseBlocks = (blocks, contentLock) => {
+    blocks.forEach(block => {
+      if (block.name === "core/group" && block.attributes?.showContentLock) {
+        block.attributes.templateLock = contentLock ? "" : "contentOnly";
+        wp.data.dispatch("core/block-editor").updateBlock(block.clientId, {
+          ...block
+        });
+      }
+      if (block.innerBlocks) {
+        parseBlocks(block.innerBlocks, contentLock);
+      }
+    });
+  };
+
+  // append a new  block to the the inner blocks list
+  const duplicateBlock = () => {
+    const block = (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_8__.createBlock)(name, {
+      showRepeaterToggle: true
+    });
+    const blocks = wp.data.select("core/block-editor").getBlocks();
+    console.log(blocks);
+    parseBlocks(blocks, true);
+    setTimeout(() => {
+      insertBlock(block, parentInnerBlocks.findIndex(getCurrentBlockPosition) + 1, firstParentClientId);
+      parseBlocks(blocks, false);
+    }, 500);
+  };
+  const deleteBlock = () => {
+    const blocks = wp.data.select("core/block-editor").getBlocks();
+    parseBlocks(blocks, true);
+    setTimeout(() => {
+      selectBlock(clientId);
+      wp.data.dispatch("core/block-editor").removeBlocks(clientId);
+      parseBlocks(blocks, false);
+    }, 500);
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, attributes.showRepeaterToggle && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
+    text: "Duplicate Block",
+    onClick: duplicateBlock
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
+    text: "Delete Block",
+    onClick: deleteBlock
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorAdvancedControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Show Repeater Option", "wpdev"),
+    checked: attributes.showRepeaterToggle,
+    onChange: showRepeaterToggle => setAttributes({
+      showRepeaterToggle
+    })
+  })));
+}
+(0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__.addFilter)("editor.BlockEdit", "wpdev/toggle-repeater", (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__.createHigherOrderComponent)(BlockEdit => {
+  return props => {
+    if (!ALLOWED_BLOCKS.includes(props.name)) {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(BlockEdit, {
+        ...props
+      });
+    }
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(BlockEdit, {
+      ...props
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RepeaterToggleEdit, {
+      ...props
+    }));
+  };
+}));
+
+/***/ }),
+
+/***/ "./src/editor/block-variation.js":
+/*!***************************************!*\
+  !*** ./src/editor/block-variation.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/dom-ready */ "@wordpress/dom-ready");
+/* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1___default()(() => {
+  const postName = ""; // wp.data.select("core/editor").getCurrentPost();
+  const postSlug = ""; // wp.data.select("core/editor").getCurrentPost().slug;
+
+  console.log(wp.data.select("core/editor"));
+
+  /**
+   * Registers a custom block variation for the Group block.
+   * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-variations/
+   */
+  (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockVariation)("core/group", {
+    name: "pattern-container",
+    title: "Pattern Container",
+    description: "Group block with locked content",
+    attributes: {
+      align: "full",
+      tagName: "section",
+      layout: {
+        type: "default"
+      },
+      metadata: {
+        name: "Pattern " + postName
+      },
+      className: "pattern-" + postSlug,
+      style: {
+        spacing: {
+          padding: {
+            top: "var:preset|spacing|40",
+            bottom: "var:preset|spacing|40",
+            left: "var:preset|spacing|20",
+            right: "var:preset|spacing|20"
+          }
+        }
+      }
+    },
+    innerBlocks: [["core/group", {
+      templateLock: "",
+      showContentLock: true,
+      layout: {
+        type: "constrained"
+      },
+      metadata: {
+        name: "Inner Container"
+      }
+    }, [["core/paragraph", {
+      placeholder: "Content locked"
+    }]]]]
+  });
+});
 
 /***/ }),
 
@@ -470,68 +729,14 @@ var __webpack_exports__ = {};
   !*** ./src/editor/index.js ***!
   \*****************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/dom-ready */ "@wordpress/dom-ready");
-/* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _content_toggle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./content-toggle */ "./src/editor/content-toggle.js");
-/* harmony import */ var _advanced_editing_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./advanced-editing-button */ "./src/editor/advanced-editing-button.js");
+/* harmony import */ var _advanced_editing_button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./advanced-editing-button */ "./src/editor/advanced-editing-button.js");
+/* harmony import */ var _block_content_toggle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block-content-toggle */ "./src/editor/block-content-toggle.js");
+/* harmony import */ var _block_repeater_toggle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block-repeater-toggle */ "./src/editor/block-repeater-toggle.js");
+/* harmony import */ var _block_variation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block-variation */ "./src/editor/block-variation.js");
 
 
 
 
-
-_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1___default()(() => {
-  const postName = ""; // wp.data.select("core/editor").getCurrentPost();
-  const postSlug = ""; // wp.data.select("core/editor").getCurrentPost().slug;
-
-  console.log(wp.data.select("core/editor"));
-
-  /**
-   * Registers a custom block variation for the Group block.
-   * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-variations/
-   */
-  (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockVariation)("core/group", {
-    name: "pattern-container",
-    title: "Pattern Container",
-    description: "Group block with locked content",
-    attributes: {
-      align: "full",
-      tagName: "section",
-      layout: {
-        type: "default"
-      },
-      metadata: {
-        name: "Pattern " + postName
-      },
-      className: "pattern-" + postSlug,
-      style: {
-        spacing: {
-          padding: {
-            top: "var:preset|spacing|40",
-            bottom: "var:preset|spacing|40",
-            left: "var:preset|spacing|20",
-            right: "var:preset|spacing|20"
-          }
-        }
-      }
-    },
-    innerBlocks: [["core/group", {
-      templateLock: "",
-      showContentLock: true,
-      layout: {
-        type: "constrained"
-      },
-      metadata: {
-        name: "Inner Container"
-      }
-    }, [["core/paragraph", {
-      placeholder: "Content locked"
-    }]]]]
-  });
-});
 })();
 
 /******/ })()
