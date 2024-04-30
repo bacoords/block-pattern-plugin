@@ -484,10 +484,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1___default()(() => {
-  // const postName = wp.data.select("core/editor").getCurrentPost();
-  // const postSlug = wp.data.select("core/editor").getCurrentPost().slug;
+  const postName = ""; // wp.data.select("core/editor").getCurrentPost();
+  const postSlug = ""; // wp.data.select("core/editor").getCurrentPost().slug;
 
-  // console.log(postName, postSlug);
+  console.log(wp.data.select("core/editor"));
 
   /**
    * Registers a custom block variation for the Group block.
@@ -503,8 +503,10 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1___default()(() => {
       layout: {
         type: "default"
       },
-      // metadata: { name: "Pattern " + postName },
-      // className: "pattern-" + postSlug,
+      metadata: {
+        name: "Pattern " + postName
+      },
+      className: "pattern-" + postSlug,
       style: {
         spacing: {
           padding: {

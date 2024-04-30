@@ -6,10 +6,10 @@ import "./content-toggle";
 import "./advanced-editing-button";
 
 domReady(() => {
-	// const postName = wp.data.select("core/editor").getCurrentPost();
-	// const postSlug = wp.data.select("core/editor").getCurrentPost().slug;
+	const postName = ""; // wp.data.select("core/editor").getCurrentPost();
+	const postSlug = ""; // wp.data.select("core/editor").getCurrentPost().slug;
 
-	// console.log(postName, postSlug);
+	console.log(wp.data.select("core/editor"));
 
 	/**
 	 * Registers a custom block variation for the Group block.
@@ -23,8 +23,8 @@ domReady(() => {
 			align: "full",
 			tagName: "section",
 			layout: { type: "default" },
-			// metadata: { name: "Pattern " + postName },
-			// className: "pattern-" + postSlug,
+			metadata: { name: "Pattern " + postName },
+			className: "pattern-" + postSlug,
 			style: {
 				spacing: {
 					padding: {
