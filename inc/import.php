@@ -59,7 +59,10 @@ function import_block_patterns() {
 			'post_status'  => 'publish',
 			'post_type'    => 'wp_block',
 			'tax_input'    => array(
-				'wp_pattern_category' => $data['categories'] ?? array(),
+				'wp_pattern_category' => explode( ',', $data['categories'] ) ?? array(),
+			),
+			'meta_input'   => array(
+				'wp_pattern_sync_status' => 'unsynced',
 			),
 		);
 

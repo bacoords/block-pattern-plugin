@@ -55,7 +55,7 @@ add_action( 'admin_menu', __NAMESPACE__ . '\add_admin_menu_link' );
 function add_pattern_custom_column( array $columns ): array {
 	unset( $columns['date'] );
 
-	$columns['sync_status'] = __( 'Sync Status', 'block-pattern-plugin' );
+	$columns['sync_status'] = __( 'Theme Sync Status', 'block-pattern-plugin' );
 	$columns['date']        = __( 'Date', 'block-pattern-plugin' );
 
 	return $columns;
