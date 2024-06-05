@@ -22,11 +22,19 @@ Shows the `wp_block` post edit screen that lists all of your patterns and allows
 
 When you save a pattern, it will automatically export the pattern to your theme's `./patterns` directory.
 
-### Theme Patterns Hidden from Site Editor
+### Import patterns from current active theme to database
+
+For now there's just a wp-cli command to grab all patterns in the theme and import them into the database. This is useful for when you're first setting up the plugin and want to get all of your theme's patterns into the database.
+
+```bash
+wp wpdev block-pattern import
+```
+
+### Theme Patterns Hidden from Site Editor (DISABLED DUE TO REST API ISSUES)
 
 Patterns in your theme are hidden from the site editor, but patterns in your database continue to show up. While this feels counterintuitive, this is to prevent you from being shown duplicate patterns with the "locked" icon that you can't edit. Once we have a way to import pattern changes back into the database, this will be revisited.
 
-## Blocks / Block Variations
+## Blocks / Block Variations (ALL OF THIS CURRENTLY DISABLED AND WILL BE MOVED TO A SEPARATE PLUGIN)
 
 ### "Advanced" Lock Toggle in Block Toolbar / Post Toolbar
 

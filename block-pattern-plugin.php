@@ -24,4 +24,11 @@ define( 'BLOCK_PATTERN_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 if ( 'local' === wp_get_environment_type() ) {
 	require plugin_dir_path( __FILE__ ) . 'inc/admin.php';
 	require plugin_dir_path( __FILE__ ) . 'inc/export.php';
+	require plugin_dir_path( __FILE__ ) . 'inc/import.php';
+}
+
+
+
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	require plugin_dir_path( __FILE__ ) . 'inc/wp-cli.php';
 }
