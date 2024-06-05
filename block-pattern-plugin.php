@@ -19,7 +19,7 @@ define( 'BLOCK_PATTERN_PLUGIN_VERSION', '0.1.0' );
 define( 'BLOCK_PATTERN_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'BLOCK_PATTERN_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
-require plugin_dir_path( __FILE__ ) . 'inc/editor.php';
+// require plugin_dir_path( __FILE__ ) . 'inc/editor.php';
 
 if ( 'local' === wp_get_environment_type() ) {
 	require plugin_dir_path( __FILE__ ) . 'inc/admin.php';
