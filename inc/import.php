@@ -39,14 +39,19 @@ function import_block_patterns() {
 			continue;
 		}
 
-		$pattern_registered = array_filter(
-			$registered,
-			function ( $pattern ) use ( $slug ) {
-				return $pattern['slug'] === $slug;
-			}
-		);
+		$pattern_registered = array();
 
-		$pattern_registered = array_values( $pattern_registered );
+		if ( $registered ) {
+
+			$pattern_registered = array_filter(
+				$registered,
+				function ( $pattern ) use ( $slug ) {
+					return isset( $pattern['slug'] ) && $pattern['slug'] === $slug;
+				}
+			);
+
+			$pattern_registered = array_values( $pattern_registered );
+		}
 
 		$content = isset( $pattern_registered[0] ) ? $pattern_registered[0]['content'] :
 		'<!-- wp:paragraph -->';

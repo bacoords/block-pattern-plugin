@@ -216,6 +216,15 @@ function replace_image_paths( string $html, string $content_dir ): string {
 }
 
 
+/**
+ * Generates pattern content for export.
+ *
+ * @since 1.0.0
+ *
+ * @param string $content The content.
+ *
+ * @return string
+ */
 function generate_pattern_content_export( string $content ) {
 
 	$content_dir = trailingslashit( dirname( get_template_directory(), 2 ) );

@@ -123,7 +123,14 @@ function get_pattern_sync_status( int $post_id ): bool {
 	$pattern_content      = trim( $pattern_content );
 	$pattern_file_content = trim( $pattern_file_content );
 
+	// Remove blank lines.
+	$pattern_content      = preg_replace( "/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $pattern_content );
+	$pattern_file_content = preg_replace( "/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $pattern_file_content );
+
 	if ( $pattern_content !== $pattern_file_content ) {
+
+		do_action( 'qm/debug', $pattern_content );
+		do_action( 'qm/debug', $pattern_file_content );
 		return false;
 	}
 
