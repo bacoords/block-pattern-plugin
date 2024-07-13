@@ -29,3 +29,7 @@ For now there's just a wp-cli command to grab all patterns in the theme and impo
 ```bash
 wp wpdev block-pattern import
 ```
+
+## Advanced Content Locking
+
+This has been pulled out of this repo and into its own plugin: [Block Locking Plugin](https://github.com/bacoords/block-locking-plugin)
