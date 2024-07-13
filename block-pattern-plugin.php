@@ -1,11 +1,12 @@
 <?php
 /**
  * Plugin Name:       Block Pattern Plugin
- * Description:       Example block scaffolded with Create Block tool.
- * Requires at least: 6.1
- * Requires PHP:      7.0
+ * Description:       Utility plugin to handle import/export of plugins to themes.
+ * Requires at least: 6.6
+ * Requires PHP:      8.1
  * Version:           0.1.0
- * Author:            The WordPress Contributors
+ * Author:            Brian Coords
+ * Author URI:        https://www.briancoords.com
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       block-pattern-plugin
@@ -18,8 +19,6 @@ namespace wpdev\block_pattern_plugin;
 define( 'BLOCK_PATTERN_PLUGIN_VERSION', '0.1.0' );
 define( 'BLOCK_PATTERN_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'BLOCK_PATTERN_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-
-// require plugin_dir_path( __FILE__ ) . 'inc/editor.php';
 
 if ( 'local' === wp_get_environment_type() ) {
 	require plugin_dir_path( __FILE__ ) . 'inc/admin.php';
